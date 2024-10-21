@@ -26,3 +26,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body{
+  background-color: var(--light-mode-background);
+  color: var(--light-mode-text);
+}
+
+.size-zero{
+  font-size: 0;
+  line-height: 0;
+}
