@@ -35,3 +35,20 @@ body{
   font-size: 0;
   line-height: 0;
 }
+
+.search {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+.search::before {
+  font: var(--fa-font-solid);
+  font-weight:600;
+  content: "\f002";
+  position: absolute;
+  top:16px;
+  left: 20px;
+  width: 2em;
+}
