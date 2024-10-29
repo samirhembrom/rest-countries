@@ -11,9 +11,12 @@ export async function loader() {
 export default function Countries() {
   const countries  = useLoaderData();
   const [query,setQuery] = useState("");
+  const [region,setRegion] = useState("");
   // countries.sort((a,b)=>a.country.name.common.localeCompare(b.country.name.common))
+  const options = [...new Set(countries.map(country=>country.region))];
+  options.unshift("Filter by region");
 
-  const countriesCard = countries.filter(country=>country.name.common.toLowerCase().includes(query)).map(country => (
+  let countriesCard = countries.filter(country=>country.name.common.toLowerCase().includes(query)).map(country => (
     <div key={country.name.common} className="transition duration-500 hover:scale-105 shadow-xl h-80 w-60 bg-white rounded overflow-hidden">
       <Link to={country.name.common}>
         <div className="h-40 size-zero">
@@ -27,17 +30,21 @@ export default function Countries() {
         </div>
       </Link>
     </div>
-  ))
-
+  ));
 
   return (
     <main className="px-20 py-5">
-      <div className="my-8">
+      <div className="flex justify-between my-8">
+        <>
         <span aria-label="hidden" className="search">
         <input placeholder='Search for a country' className="shadow-xl h-12 w-96 rounded-sm px-16 py-1" type="text" onChange={(e)=> setQuery(e.target.value)} />
         </span>
+        </>
+        <select name="selectedRegion" onChange={(e)=>setRegion(e.target.value)}>
+          {options.map(option=><option key={option} value={option}>{option}</option>)}
+        </select>
       </div>
-      <div className="flex flex-wrap justify-between gap-8">
+      <div className="grid grid-cols-4 gap-x-24 gap-y-12">
         {countriesCard}
       </div>
     </main>
